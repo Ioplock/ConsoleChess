@@ -19,8 +19,29 @@ class Board:
         self.moves = []
         self.get_curr_color = lambda: 'white' if self.turn else 'black'
 
-    def default_layout():
-        pass
+    def default_layout(self):
+        figures = [
+            Rook('black', 0, 0),
+            Knight('black', 1, 0),
+            Bishop('black', 2, 0),
+            King('black', 3, 0),
+            Queen('black', 4, 0),
+            Bishop('black', 5, 0),
+            Knight('black', 6, 0),
+            Rook('black', 7, 0),
+            Rook('white', 0, 7),
+            Knight('white', 1, 7),
+            Bishop('white', 2, 7),
+            King('white', 3, 7),
+            Queen('white', 4, 7),
+            Bishop('white', 5, 7),
+            Knight('white', 6, 7),
+            Rook('white', 7, 7)
+        ]
+        for i in range(8):
+            figures.append(Pawn('black', i, 1))
+            figures.append(Pawn('white', i, 6))
+        self.__batch_place_figure(figures)
 
     def process_move(self, move):
         print(move)
@@ -75,6 +96,10 @@ class Board:
         else:
             return None
 
+    def __batch_place_figure(self, figures):
+        for fig in figures:
+            self.place_figure(fig)
+
     def place_figure(self, figure):
         if self.is_in_bounds(figure.x, figure.y):
             if self.is_empty(figure.x, figure.y):
@@ -118,8 +143,7 @@ class Board:
     
 if __name__ == "__main__":
     board = Board()
-    a = King('black', 4, 4)
-    board.place_figure(a)
+    board.default_layout()
 
     while True:
         move = board.expect_move()
