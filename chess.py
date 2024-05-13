@@ -43,6 +43,36 @@ class Board:
             figures.append(Pawn('white', i, 6))
         self.__batch_place_figure(figures)
 
+    def checkers_layout(self):
+        figures = [
+            Checker('black', 0, 1),
+            Checker('black', 1, 0),
+            Checker('black', 1, 2),
+            Checker('black', 2, 1),
+            Checker('black', 3, 0),
+            Checker('black', 3, 2),
+            Checker('black', 4, 1),
+            Checker('black', 5, 0),
+            Checker('black', 5, 2),
+            Checker('black', 6, 1),
+            Checker('black', 7, 0),
+            Checker('black', 7, 2),
+
+            Checker('white', 0, 5),
+            Checker('white', 0, 7),
+            Checker('white', 1, 6),
+            Checker('white', 2, 5),
+            Checker('white', 2, 7),
+            Checker('white', 3, 6),
+            Checker('white', 4, 5),
+            Checker('white', 4, 7),
+            Checker('white', 5, 6),
+            Checker('white', 6, 5),
+            Checker('white', 6, 7),
+            Checker('white', 7, 6),
+        ]
+        self.__batch_place_figure(figures)
+
     def process_move(self, move):
         print(move)
         fig = move.fig.make_move(move.xy2[0], move.xy2[1], self)
@@ -143,9 +173,9 @@ class Board:
     
 if __name__ == "__main__":
     board = Board()
-    board.default_layout()
+    # board.default_layout()
+    board.checkers_layout()
 
     while True:
         move = board.expect_move()
         board.process_move(move)
-
